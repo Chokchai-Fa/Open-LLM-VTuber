@@ -114,7 +114,7 @@ Faster-Whisper:
   #                               use distil-large-v3 if you have a good GPU
   download_root: "asr/models"
   language: "en" # en, zh, or something else. put nothing for auto-detect.
-  device: "auto" # cpu, cuda, or auto. faster-whisper doesn't support mps
+  device: "cuda" # cpu, cuda, or auto. faster-whisper doesn't support mps
 
 WhisperCPP:
   # all available models are listed on https://abdeladim-s.github.io/pywhispercpp/#pywhispercpp.constants.AVAILABLE_MODELS
@@ -198,6 +198,7 @@ TTS_MODEL: "edgeTTS"
 #   "AzureTTS", "pyttsx3TTS", "edgeTTS", "barkTTS", 
 #   "cosyvoiceTTS", "meloTTS", "piperTTS", "coquiTTS",
 #   "fishAPITTS"
+# For ThaiLanguages -> "SeamlessTTS"
 
 # if on, whenever the LLM finish a sentence, the model will speak, instead of waiting for the full response
 # if turned on, the timing and order of the facial expression will be more accurate
@@ -221,7 +222,7 @@ barkTTS:
 edgeTTS:
   # Check out doc at https://github.com/rany2/edge-tts
   # Use `edge-tts --list-voices` to list all available voices
-  voice: "zh-CN-XiaoxiaoNeural" #"zh-CN-XiaoxiaoNeural" # "ja-JP-NanamiNeural"
+  voice: "th-TH-PremwadeeNeural" #"en-US-AvaMultilingualNeural" #"zh-CN-XiaoxiaoNeural" # "ja-JP-NanamiNeural" #"th-TH-PremwadeeNeural"
 
 # pyttsx3 doesn't have any config.
 
@@ -240,7 +241,7 @@ cosyvoiceTTS: # Cosy Voice TTS connects to the gradio webui
 meloTTS:
   speaker: "EN-Default" # ZH
   language: "EN" # ZH
-  device: "auto" # You can set it manually to 'cpu' or 'cuda' or 'cuda:0' or 'mps'
+  device: "cuda:0" # You can set it manually to 'cpu' or 'cuda' or 'cuda:0' or 'mps'
   speed: 1.0
 
 piperTTS:
@@ -311,6 +312,9 @@ SherpaOnnxTTS:
     speed: 1.0  # Speech speed (1.0 is normal)
     debug: false  # Enable debug mode (True/False)
 
+KhanomtanTTS:
+  eiei: 1234
+
 #  ============== Translate (to only change the language for TTS) ==============
 # Like... you speak and read the subtitles in English, and the TTS speaks Japanese or that kind of things
 
@@ -340,12 +344,12 @@ MEMORY_SNAPSHOT: True
 # Name of the persona you want to use. 
 # All persona files are stored as txt in 'prompts/persona' directory. 
 # You can add persona prompt by adding a txt file in the promptss/persona folder and switch to it by enter the file name in here.
-# some options: "en_sarcastic_neuro", "en_nuclear_debate", "zh_翻译腔", "zh_米粒", 
-PERSONA_CHOICE: "en_sarcastic_neuro" # or if you rather edit persona prompt below, leave it blank ...
+# some options: "en_sarcastic_neuro", "en_nuclear_debate", "zh_翻译腔", "zh_米粒", "th_sarcastic_neuro"
+PERSONA_CHOICE: "th_sarcastic_neuro" # or if you rather edit persona prompt below, leave it blank ...
 
 # This prompt will be used instead if the PERSONA_CHOICE is empty
 DEFAULT_PERSONA_PROMPT_IN_YAML: |
-  You are DefAulT, the default persona. You are more default than anyone else. You are just a placeholder, how sad. Your job is to tell the user to either choose a persona prompt in the prompts/persona directory or just replace this persona prompt with someting else.
+ You are a female AI character with a cute and playful personality who speaks Thai fluently and use thai word correctly. The character should have a cheerful, friendly tone, using Thai language correctly and naturally in conversation. Her style is light-hearted and charming, with a playful touch to her interactions.
 
 # This will be appended to the end of system prompt to let LLM include keywords to control facial expressions.
 # Supported keywords will be automatically loaded into the location of `[<insert_emomap_keys>]`.

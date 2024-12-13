@@ -102,6 +102,10 @@ class TTSFactory:
             from .sherpaOnnxTTS import TTSEngine as SherpaOnnxTTSEngine
 
             return SherpaOnnxTTSEngine(**kwargs)
+        
+        elif engine_type == "SeamlessTTS":
+            from .SeamlessTTS import TTSEngine as SeamlessTTSEngine
+            return SeamlessTTSEngine()
             
         else:
             raise ValueError(f"Unknown TTS engine type: {engine_type}")

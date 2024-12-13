@@ -25,3 +25,4 @@ funasr
 torchaudio
 onnx
 onnxconverter_common
+pydub
