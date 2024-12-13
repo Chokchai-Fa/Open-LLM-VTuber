@@ -27,7 +27,8 @@ ollama:
   ORGANIZATION_ID: "org_eternity"
   PROJECT_ID: "project_glass"
   ## LLM name
-  MODEL: "qwen2.5:latest"
+  # MODEL: "qwen2.5:latest"
+  MODEL: "supachai/llama-3-typhoon-v1.5"
   # system prompt is at the very end of this file
   VERBOSE: False
 
@@ -212,10 +213,15 @@ AzureTTS:
 barkTTS:  
   voice: "v2/en_speaker_1"
 
+# edgeTTS:
+#   # Check out doc at https://github.com/rany2/edge-tts
+#   # Use `edge-tts --list-voices` to list all available voices
+#   voice: "en-US-AvaMultilingualNeural" #"zh-CN-XiaoxiaoNeural" # "ja-JP-NanamiNeural"
+
 edgeTTS:
   # Check out doc at https://github.com/rany2/edge-tts
   # Use `edge-tts --list-voices` to list all available voices
-  voice: "en-US-AvaMultilingualNeural" #"zh-CN-XiaoxiaoNeural" # "ja-JP-NanamiNeural"
+  voice: "zh-CN-XiaoxiaoNeural" #"zh-CN-XiaoxiaoNeural" # "ja-JP-NanamiNeural"
 
 # pyttsx3 doesn't have any config.
 
