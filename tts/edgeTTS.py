@@ -1,9 +1,8 @@
 import sys
 import os
-from pathlib import Path
-
 import edge_tts
 from .tts_interface import TTSInterface
+from utils.th_tokenizer import th_tokenizer
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(current_dir)
@@ -41,7 +40,8 @@ class TTSEngine(TTSInterface):
         file_name = self.generate_cache_file_name(file_name_no_ext, self.file_extension)
 
         try:
-            communicate = edge_tts.Communicate(text, self.voice, pitch="+500Hz")
+            text = th_tokenizer(text)
+            communicate = edge_tts.Communicate(text, self.voice, pitch="+200Hz")
             communicate.save_sync(file_name)
         except Exception as e:
             print(f"\nError: edge-tts unable to generate audio: {e}")

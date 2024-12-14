@@ -198,11 +198,14 @@ TTS_MODEL: "edgeTTS"
 #   "AzureTTS", "pyttsx3TTS", "edgeTTS", "barkTTS", 
 #   "cosyvoiceTTS", "meloTTS", "piperTTS", "coquiTTS",
 #   "fishAPITTS"
-# For ThaiLanguages -> "SeamlessTTS"
+# For ThaiLanguages -> "edegeTTS","SeamlessTTS", "googleTTS"
 
 # if on, whenever the LLM finish a sentence, the model will speak, instead of waiting for the full response
 # if turned on, the timing and order of the facial expression will be more accurate
 SAY_SENTENCE_SEPARATELY: True
+
+googleTTS:
+  language: "th"
 
 AzureTTS:
   api_key: "azure-api-key"

@@ -106,6 +106,10 @@ class TTSFactory:
         elif engine_type == "SeamlessTTS":
             from .SeamlessTTS import TTSEngine as SeamlessTTSEngine
             return SeamlessTTSEngine()
+        
+        elif engine_type == "googleTTS":
+            from .googleTTS import TTSEngine as GoogleTTSEngine
+            return GoogleTTSEngine(kwargs.get("language"))
             
         else:
             raise ValueError(f"Unknown TTS engine type: {engine_type}")

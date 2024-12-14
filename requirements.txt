@@ -26,3 +26,7 @@ torchaudio
 onnx
 onnxconverter_common
 pydub
+gTTS
+pythainlp
+deepcut
+python-crfsuite
