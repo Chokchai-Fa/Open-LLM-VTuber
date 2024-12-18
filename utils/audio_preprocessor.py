@@ -22,7 +22,7 @@ def audio_filter(
 
     if remove_special_char:
         try:
-            text = remove_special_characters(text)
+            text = remove_special_characters_utf8(text)
         except Exception as e:
             print(f"Error removing special characters: {e}")
             print(f"Text: {text}")
