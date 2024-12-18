@@ -65,6 +65,15 @@ def remove_special_characters(text: str) -> str:
     return filtered_text
 
 
+def remove_special_characters_utf8(text: str) -> str:ล
+    filtered_text = "".join(
+        char
+        for char in text
+        if char.isalnum() or char.isspace() or char in r"""!#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""
+    )
+
+    return filtered_text
+
 if __name__ == "__main__":
     while True:
-        print(remove_special_characters(input(">> ")))
+        print(remove_special_characters_utf8(input(">> ")))
