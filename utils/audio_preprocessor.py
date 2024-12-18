@@ -69,7 +69,7 @@ def remove_special_characters_utf8(text: str) -> str:
     filtered_text = "".join(
         char
         for char in text
-        if char.isalnum() or char.isspace() or char in r"""!#$%&'()*+,-./:;<=>?@[\]^_`{|}~"""
+        if char.isalnum() or char.isspace() or char in r"""!#$%&'()*+,-./:;<=>?@[\]^_`{|}~""" or unicodedata.category(char).startswith(("L", "M"))
     )
 
     return filtered_text
