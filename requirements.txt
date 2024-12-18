@@ -30,3 +30,6 @@ gTTS
 pythainlp
 deepcut
 python-crfsuite
+openai
+librosa
+soundfile

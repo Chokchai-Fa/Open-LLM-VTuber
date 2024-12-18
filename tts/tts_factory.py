@@ -110,6 +110,10 @@ class TTSFactory:
         elif engine_type == "googleTTS":
             from .googleTTS import TTSEngine as GoogleTTSEngine
             return GoogleTTSEngine(kwargs.get("language"))
+        
+        elif engine_type == "openAITTS":
+            from .openAITTS import TTSEngine as OpenAITTSEngine
+            return OpenAITTSEngine(**kwargs)
             
         else:
             raise ValueError(f"Unknown TTS engine type: {engine_type}")
