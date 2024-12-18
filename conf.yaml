@@ -17,7 +17,7 @@ REMOVE_SPECIAL_CHAR: True # remove special characters like emoji from audio gene
 # Provider of LLM. Options available: "ollama", "memgpt", "mem0", "claude", "llamacpp"
 #   (or "fakellm for debug purposes")
 # "ollama" for any OpenAI Compatible backend. "memgpt" requires setup
-LLM_PROVIDER: "llamacpp"
+LLM_PROVIDER: "ollama"
 
 # Ollama & OpenAI Compatible inference backend
 ollama:
@@ -40,7 +40,7 @@ claude:
   VERBOSE: False
 
 llamacpp:
-  MODEL_PATH: "/Users/phisit/Downloads/Meta-Llama-3.1-8B-Instruct-Q6_K.gguf"
+  MODEL_PATH: "/Users/sivakorn/Downloads/meta-llama-3.1-8b-instruct.Q6_K.gguf"
   VERBOSE: True
   N_GPU_LAYERS: -1
   N_CTX: 2048
@@ -199,7 +199,7 @@ GroqWhisperASR:
 
 # ============== Text to Speech ==============
 TTS_ON: True
-TTS_MODEL: "edgeTTS"
+TTS_MODEL: "mms_tts_tha"
 # text to speech model options: 
 #   "AzureTTS", "pyttsx3TTS", "edgeTTS", "barkTTS", 
 #   "cosyvoiceTTS", "meloTTS", "piperTTS", "coquiTTS",
