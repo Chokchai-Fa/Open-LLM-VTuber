@@ -26,6 +26,8 @@ class LLMFactory:
                 model_path=kwargs.get("MODEL_PATH"),
                 system=kwargs.get("SYSTEM_PROMPT"),
                 verbose=kwargs.get("VERBOSE", False),
+                n_gpu_layers=-1,
+                n_ctx=2048,
             )
         elif llm_provider == "mem0":
             from llm.mem0_llm import LLM as Mem0LLM

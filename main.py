@@ -240,9 +240,12 @@ class OpenLLMVTuberMain:
             print("Exiting...")
             exit()
 
+        print(f"==============")
         print(f"User input: {user_input}")
+        print(f"==============")
 
         chat_completion: Iterator[str] = self.llm.chat_iter(user_input)
+        print(f"chat completion output: {chat_completion}")
 
         if not self.config.get("TTS_ON", False):
             full_response = ""

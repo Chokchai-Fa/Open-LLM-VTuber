@@ -17,7 +17,7 @@ REMOVE_SPECIAL_CHAR: True # remove special characters like emoji from audio gene
 # Provider of LLM. Options available: "ollama", "memgpt", "mem0", "claude", "llamacpp"
 #   (or "fakellm for debug purposes")
 # "ollama" for any OpenAI Compatible backend. "memgpt" requires setup
-LLM_PROVIDER: "ollama"
+LLM_PROVIDER: "llamacpp"
 
 # Ollama & OpenAI Compatible inference backend
 ollama:
@@ -40,8 +40,10 @@ claude:
   VERBOSE: False
 
 llamacpp:
-  MODEL_PATH: "<path-to-gguf-model-file>"
+  MODEL_PATH: "/Users/phisit/Downloads/Meta-Llama-3.1-8B-Instruct-Q6_K.gguf"
   VERBOSE: True
+  N_GPU_LAYERS: -1
+  N_CTX: 2048
 
 mem0:
   USER_ID: "user-0"
@@ -96,7 +98,7 @@ memgpt:
 # ============== Live2D front-end Settings ==============
 
 LIVE2D: False # Deprecated and useless now. Do not enable it. Bad things will happen.
-LIVE2D_MODEL: "shizuku-local"
+LIVE2D_MODEL: "hiyori"
 
 #  ============== Voice Interaction Settings ==============
 
@@ -118,7 +120,7 @@ Faster-Whisper:
   #                               use distil-large-v3 if you have a good GPU
   download_root: "asr/models"
   language: "en" # en, zh, or something else. put nothing for auto-detect.
-  device: "cuda" # cpu, cuda, or auto. faster-whisper doesn't support mps
+  device: "auto" # cpu, cuda, or auto. faster-whisper doesn't support mps
 
 WhisperCPP:
   # all available models are listed on https://abdeladim-s.github.io/pywhispercpp/#pywhispercpp.constants.AVAILABLE_MODELS
@@ -197,7 +199,7 @@ GroqWhisperASR:
 
 # ============== Text to Speech ==============
 TTS_ON: True
-TTS_MODEL: "openAITTS"
+TTS_MODEL: "edgeTTS"
 # text to speech model options: 
 #   "AzureTTS", "pyttsx3TTS", "edgeTTS", "barkTTS", 
 #   "cosyvoiceTTS", "meloTTS", "piperTTS", "coquiTTS",
@@ -352,7 +354,7 @@ MEMORY_SNAPSHOT: True
 # All persona files are stored as txt in 'prompts/persona' directory. 
 # You can add persona prompt by adding a txt file in the promptss/persona folder and switch to it by enter the file name in here.
 # some options: "en_sarcastic_neuro", "en_nuclear_debate", "zh_翻译腔", "zh_米粒", "th_sarcastic_neuro"
-PERSONA_CHOICE: "th_sarcastic_neuro" # or if you rather edit persona prompt below, leave it blank ...
+PERSONA_CHOICE: "th_myshop_seller" # or if you rather edit persona prompt below, leave it blank ...
 
 # This prompt will be used instead if the PERSONA_CHOICE is empty
 DEFAULT_PERSONA_PROMPT_IN_YAML: |

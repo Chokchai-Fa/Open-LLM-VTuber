@@ -66,7 +66,6 @@ def remove_special_characters(text: str) -> str:
 
 
 def remove_special_characters_utf8(text: str) -> str:
-
     filtered_text = "".join(
         char
         for char in text
