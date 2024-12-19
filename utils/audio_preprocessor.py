@@ -22,7 +22,7 @@ def audio_filter(
 
     if remove_special_char:
         try:
-            text = remove_special_characters(text)
+            text = remove_special_characters_utf8(text)
         except Exception as e:
             print(f"Error removing special characters: {e}")
             print(f"Text: {text}")
@@ -65,6 +65,15 @@ def remove_special_characters(text: str) -> str:
     return filtered_text
 
 
+def remove_special_characters_utf8(text: str) -> str:
+    filtered_text = "".join(
+        char
+        for char in text
+        if char.isalnum() or char.isspace() or char in r"""!#$%&'()*+,-./:;<=>?@[\]^_`{|}~""" or unicodedata.category(char).startswith(("L", "M"))
+    )
+
+    return filtered_text
+
 if __name__ == "__main__":
     while True:
-        print(remove_special_characters(input(">> ")))
+        print(remove_special_characters_utf8(input(">> ")))

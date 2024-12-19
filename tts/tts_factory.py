@@ -102,6 +102,22 @@ class TTSFactory:
             from .sherpaOnnxTTS import TTSEngine as SherpaOnnxTTSEngine
 
             return SherpaOnnxTTSEngine(**kwargs)
+        
+        elif engine_type == "SeamlessTTS":
+            from .SeamlessTTS import TTSEngine as SeamlessTTSEngine
+            return SeamlessTTSEngine()
+        
+        elif engine_type == "googleTTS":
+            from .googleTTS import TTSEngine as GoogleTTSEngine
+            return GoogleTTSEngine(kwargs.get("language"))
+        
+        elif engine_type == "openAITTS":
+            from .openAITTS import TTSEngine as OpenAITTSEngine
+            return OpenAITTSEngine(**kwargs)
+        
+        elif engine_type == "mms_tts_tha":
+            from .mms_tts_tha import TTSEngine as MmsTtsThaEngine
+            return MmsTtsThaEngine(**kwargs)
             
         else:
             raise ValueError(f"Unknown TTS engine type: {engine_type}")

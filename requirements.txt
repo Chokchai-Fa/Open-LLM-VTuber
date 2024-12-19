@@ -20,3 +20,16 @@ httpx
 faster_whisper
 chardet
 anthropic>=0.18.0
+torch
+funasr
+torchaudio
+onnx
+onnxconverter_common
+pydub
+gTTS
+pythainlp
+deepcut
+python-crfsuite
+openai
+librosa
+soundfile
