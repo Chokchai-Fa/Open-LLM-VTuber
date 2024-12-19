@@ -32,7 +32,13 @@ class LLM(LLMInterface):
         self.system = system
         self.memory = []
         self.verbose = verbose
-        self.llm = Llama(model_path=model_path, **kwargs)
+        self.llm = Llama(
+            model_path=model_path,
+            n_gpu_layers=kwargs.get("N_GPU_LAYERS"),
+            n_ctx=kwargs.get("N_CTX", 2048),
+            n_threads=kwargs.get("N_THREADS"),
+            **kwargs,
+            )
 
         self.__set_system(system)
 
