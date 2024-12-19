@@ -44,6 +44,7 @@ llamacpp:
   VERBOSE: True
   N_GPU_LAYERS: -1
   N_CTX: 2048
+  N_THREADS: 5
 
 mem0:
   USER_ID: "user-0"

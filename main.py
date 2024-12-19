@@ -19,6 +19,8 @@ from asr.asr_interface import ASRInterface
 from live2d_model import Live2dModel
 from llm.llm_factory import LLMFactory
 from llm.llm_interface import LLMInterface
+from product.product_factory import ProductFactory
+from product.product_interface import ProductInterface
 from prompts import prompt_loader
 from tts.tts_factory import TTSFactory
 from tts.tts_interface import TTSInterface
@@ -57,6 +59,8 @@ class OpenLLMVTuberMain:
         self._continue_exec_flag.set()  # Set the flag to continue execution
         self.session_id: str = str(uuid.uuid4().hex)
         self.heard_sentence: str = ""
+
+        sys.setrecursionlimit(150000)
 
         # Init ASR if voice input is on.
         self.asr: ASRInterface | None
@@ -100,6 +104,8 @@ class OpenLLMVTuberMain:
 
         self.llm: LLMInterface = self.init_llm()
 
+        self.product: ProductInterface = self.init_product()
+
     # Initialization methods
 
     def init_live2d(self) -> Live2dModel | None:
@@ -134,6 +140,9 @@ class OpenLLMVTuberMain:
         tts_model = self.config.get("TTS_MODEL", "pyttsx3TTS")
         tts_config = self.config.get(tts_model, {})
         return TTSFactory.get_tts_engine(tts_model, **tts_config)
+    
+    def init_product(self) -> ProductInterface:
+        return ProductFactory.create_product_provider("line_shopping")
 
     def set_audio_output_func(
         self, audio_output_func: Callable[[Optional[str], Optional[str]], None]
@@ -244,8 +253,24 @@ class OpenLLMVTuberMain:
         print(f"User input: {user_input}")
         print(f"==============")
 
-        chat_completion: Iterator[str] = self.llm.chat_iter(user_input)
-        print(f"chat completion output: {chat_completion}")
+        chat_type = self.llm.chat_type(user_input)
+        print (chat_type)
+
+        def iter_products(products) -> Iterator[str]:
+            p_array = products.split(",")
+            for p in p_array:
+                yield p
+
+        if chat_type == "Conversation":
+            chat_completion: Iterator[str] = self.llm.chat_iter(user_input)
+        elif chat_type == "GetProducts":
+            products = self.product.get_products()
+            print(f"==============")
+            print(f"products input: {products}")
+            print(f"==============")
+            prompt = "from json:" + products + " จงเล่ารายละเอียดของสินค้าเอาเฉพาะชื่อกับลักษณะ"
+            chat_completion: Iterator[str] = self.llm.chat_iter(prompt)
+            
 
         if not self.config.get("TTS_ON", False):
             full_response = ""
@@ -412,6 +437,10 @@ class OpenLLMVTuberMain:
                                     "REMOVE_SPECIAL_CHAR", True
                                 ),
                             )
+                            if self.verbose:
+                                print("\n========")
+                                print("tts_traget_sentence: {tts_target_sentence}")
+                                print("\n========")
 
                             audio_filepath = self._generate_audio_file(
                                 tts_target_sentence, file_name_no_ext=uuid.uuid4()
