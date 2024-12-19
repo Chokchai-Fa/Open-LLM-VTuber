@@ -72,6 +72,96 @@ class LLM(LLMInterface):
         print(" -- Model Path: " + self.model_path)
         print(" -- System: " + self.system)
 
+    def __save_memory(self, prompt: str):
+        self.memory.append(
+            {
+                "role": "user",
+                "content": prompt,
+            }
+        )
+        if self.verbose:
+            self.__print_memory()
+            print(f" -- Model Path: {self.model_path}")
+            print(f" -- System: {self.system}")
+            print(f" -- Prompt: {prompt}\n\n")
+
+    def chat_type(self, prompt: str) -> str:
+        self.__save_memory(prompt)
+        try:
+            chat_completion = self.llm.create_chat_completion(
+                messages=self.memory,
+                tools=[{
+                    "type": "function",
+                    "function": {
+                        "name": "GetProducts",
+                        "description": "get products from myshop",
+                        "parameters": {}
+                    }
+                },
+                {
+                    "type": "function",
+                    "function": {
+                        "name": "Conversation",
+                        "description": "small talk with user",
+                        "parameters": {}
+                    }
+                }],
+                tool_choice="auto",
+            )
+        except Exception as e:
+            print(f"Error calling llama.cpp: {str(e)}")
+            self.__printDebugInfo()
+            return iter([f"Error calling llama.cpp: {str(e)}"])
+        """
+        example response:
+        {
+            "id": "chatcmpl-a14ede36-7247-41c1-ad68-d12ece35ea99",
+            "object": "chat.completion",
+            "created": 1734601539,
+            "model": "/Users/phisit/Downloads/Meta-Llama-3.1-8B-Instruct-Q6_K.gguf",
+            "choices": [
+                {
+                "index": 0,
+                "message": {
+                    "role": "assistant",
+                    "content": "{\"name\": \"Conversation\", \"parameters\": {\"topic\": \"good fall\"}}"
+                },
+                "logprobs": null,
+                "finish_reason": "stop"
+                }
+            ],
+            "usage": {
+                "prompt_tokens": 329,
+                "completion_tokens": 16,
+                "total_tokens": 345
+            }
+            }
+        """
+        try:
+            print("choices: \n")
+            print (chat_completion["choices"][0]["message"]["content"])
+            print("choices: \n\n")
+
+            content = json.loads(chat_completion["choices"][0]["message"]["content"])
+        except Exception as e:
+            print(f"Error calling llama.cpp: {str(e)}")
+            self.__printDebugInfo()
+            return "Error calling llama.cpp:" + str(e)
+        print(content["name"])
+        return content["name"]
+            
+        # Store complete response after generation
+        # response_json = json.load(complete_response)
+        # if response_json["name"]:
+        #     if response_json["name"] == "Conversation":
+        #         chat_completion = self.llm.create_chat_completion(
+        #             messages=self.memory, stream=True,
+        #         )
+        #         return _generate_response()
+        #     elif response_json["name"] == "GetProducts":
+        #         return "".join("GetProducts")
+        
+
     def chat_iter(self, prompt: str) -> Iterator[str]:
         self.memory.append(
             {

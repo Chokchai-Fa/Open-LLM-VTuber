@@ -40,7 +40,7 @@ claude:
   VERBOSE: False
 
 llamacpp:
-  MODEL_PATH: "/Users/phisit/Downloads/functionary-small-v3.2.Q8_0.gguf"
+  MODEL_PATH: "/Users/phisit/Downloads/Meta-Llama-3.1-8B-Instruct-Q6_K.gguf"
   VERBOSE: True
   N_GPU_LAYERS: -1
   N_CTX: 2048
