@@ -54,5 +54,8 @@ class ASRFactory:
         elif system_name == "SherpaOnnxASR":
             from .sherpa_onnx_asr import VoiceRecognition as SherpaOnnxASR
             return SherpaOnnxASR(**kwargs)
+        elif system_name == "OpenAI":
+            from .openai_asr import VoiceRecognition as OpenAIASR
+            return OpenAIASR(**kwargs)
         else:
             raise ValueError(f"Unknown ASR system: {system_name}")

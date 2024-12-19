@@ -108,7 +108,8 @@ VOICE_INPUT_ON: True
 MIC_IN_BROWSER: False # Deprecated and useless now. Do not enable it. Bad things will happen.
 
 # speech to text model options: "Faster-Whisper", "WhisperCPP", "Whisper", "AzureASR", "FunASR", "GroqWhisperASR", "SherpaOnnxASR"
-ASR_MODEL: "Faster-Whisper"
+# thai language: "PyThaiASR", "OpenAI"
+ASR_MODEL: "OpenAI"
 
 AzureASR:
   api_key: "azure_api_key"
@@ -140,7 +141,7 @@ Whisper:
 # to download / check the models. You can disconnect the internet after initialization.
 # Or you can use Faster-Whisper for complete offline experience
 FunASR:
-  model_name: "iic/SenseVoiceSmall" # or "paraformer-zh"
+  model_name: "iic/SenseVoiceSmall" # or "paraformer-zh" thai-lang use "iic/Whisper-large-v3-turbo"
   vad_model: "fsmn-vad" # this is only used to make it works if audio is longer than 30s
   punc_model: "ct-punc" # punctuation model.
   device: "cpu"

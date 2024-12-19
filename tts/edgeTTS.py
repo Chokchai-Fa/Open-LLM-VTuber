@@ -41,7 +41,7 @@ class TTSEngine(TTSInterface):
 
         try:
             # text = th_tokenizer(text)
-            communicate = edge_tts.Communicate(text, self.voice, pitch="+25Hz")
+            communicate = edge_tts.Communicate(text, self.voice, pitch="+35Hz")
             communicate.save_sync(file_name)
         except Exception as e:
             print(f"\nError: edge-tts unable to generate audio: {e}")

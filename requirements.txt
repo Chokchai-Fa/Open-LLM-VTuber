@@ -33,3 +33,7 @@ python-crfsuite
 openai
 librosa
 soundfile
+pythaiasr
+modelscope 
+huggingface 
+huggingface_hub
