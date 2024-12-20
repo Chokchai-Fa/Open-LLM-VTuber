@@ -36,7 +36,6 @@ class LLM(LLMInterface):
             parameters={
                 "type": "object",
                 "properties": {
-                    "textQuery": { "type": "string" }
                 },
             }
         )
