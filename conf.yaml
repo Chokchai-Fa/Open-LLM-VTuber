@@ -17,7 +17,7 @@ REMOVE_SPECIAL_CHAR: True # remove special characters like emoji from audio gene
 # Provider of LLM. Options available: "ollama", "memgpt", "mem0", "claude", "llamacpp"
 #   (or "fakellm for debug purposes")
 # "ollama" for any OpenAI Compatible backend. "memgpt" requires setup
-LLM_PROVIDER: "llamacpp"
+LLM_PROVIDER: "vertex"
 
 # Ollama & OpenAI Compatible inference backend
 ollama:
@@ -31,6 +31,11 @@ ollama:
   MODEL: "supachai/llama-3-typhoon-v1.5"
   # system prompt is at the very end of this file
   VERBOSE: False
+
+vertex:
+  PROJECT_ID: "vision-1241"
+  LOCATION: "asia-southeast1"
+  MODEL: "gemini-1.5-flash-002"
 
 # Claude API Configuration
 claude:

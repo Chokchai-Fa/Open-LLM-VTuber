@@ -8,4 +8,7 @@ Basically, a websocket server.
 Flow
 - If preload, initialized speech recognition (ASR) and  Text to Speech (TTS)
   - init
-    - ASRFactory and TTSFactory for switching between models
+    - ASR
+    - TTS
+    - both preloaded on start
+    - Factory patter to easily switch between engines

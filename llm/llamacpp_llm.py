@@ -94,7 +94,7 @@ class LLM(LLMInterface):
                     "type": "function",
                     "function": {
                         "name": "GetProducts",
-                        "description": "get products from myshop",
+                        "description": "user อยากดูสินค้า หรือถามว่ามีอะไรขายบ้าง หรือในร้านมีอะไรบ้าง",
                         "parameters": {}
                     }
                 },
@@ -102,7 +102,7 @@ class LLM(LLMInterface):
                     "type": "function",
                     "function": {
                         "name": "Conversation",
-                        "description": "small talk with user",
+                        "description": "เรื่องอื่นๆ ที่ไม่ใช่สินค้า",
                         "parameters": {}
                     }
                 }],

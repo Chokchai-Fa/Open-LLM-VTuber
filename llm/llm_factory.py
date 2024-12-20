@@ -4,6 +4,7 @@ from .ollama import LLM as OllamaLLM
 from .memGPT import LLM as MemGPTLLM
 from .fake_llm import LLM as FakeLLM
 from .claude import LLM as ClaudeLLM
+from .vertex import LLM as VertexLLM
 
 
 class LLMFactory:
@@ -55,6 +56,13 @@ class LLMFactory:
                 model=kwargs.get("MODEL"),
                 llm_api_key=kwargs.get("LLM_API_KEY"),
                 verbose=kwargs.get("VERBOSE", False),
+            )
+        elif llm_provider == "vertex":
+            return VertexLLM(
+                system=kwargs.get("SYSTEM_PROMPT"),
+                project=kwargs.get("PROJECT_ID"),
+                location=kwargs.get("LOCATION"),
+                model=kwargs.get("MODEL"),
             )
         elif llm_provider == "fakellm":
             return FakeLLM()

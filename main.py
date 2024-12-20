@@ -253,23 +253,19 @@ class OpenLLMVTuberMain:
         print(f"User input: {user_input}")
         print(f"==============")
 
-        chat_type = self.llm.chat_type(user_input)
-        print (chat_type)
+        # chat_type = self.llm.chat_type(user_input)
+        # print (chat_type)
 
-        def iter_products(products) -> Iterator[str]:
-            p_array = products.split(",")
-            for p in p_array:
-                yield p
-
-        if chat_type == "Conversation":
-            chat_completion: Iterator[str] = self.llm.chat_iter(user_input)
-        elif chat_type == "GetProducts":
-            products = self.product.get_products()
-            print(f"==============")
-            print(f"products input: {products}")
-            print(f"==============")
-            prompt = "from json:" + products + " จงเล่ารายละเอียดของสินค้าเอาเฉพาะชื่อกับลักษณะ"
-            chat_completion: Iterator[str] = self.llm.chat_iter(prompt)
+        # if chat_type == "Conversation":
+        #     chat_completion: Iterator[str] = self.llm.chat_iter(user_input)
+        # elif chat_type == "GetProducts":
+        #     products = self.product.get_products()
+        #     print(f"==============")
+        #     print(f"products input: {products}")
+        #     print(f"==============")
+        #     prompt = "from json:" + products + " จงเล่ารายละเอียดของสินค้าเอาเฉพาะชื่อกับลักษณะ"
+        #     chat_completion: Iterator[str] = self.llm.chat_iter(prompt)
+        chat_completion: Iterator[str] = self.llm.chat_iter(user_input)
             
 
         if not self.config.get("TTS_ON", False):
